@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Customer extends Model
 {
@@ -16,7 +17,13 @@ class Customer extends Model
             'mobile_no',
             'address',
             'status',
+            'disponible',
             'created_by',
             'updated_by'        
     ];
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

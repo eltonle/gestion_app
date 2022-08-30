@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Report Invoice</title>
+    <title>Rapport facturation</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                  <tbody>
                     <tr>
                         <td width="30%"></td>
-                        <td> <u><strong><span style="font-size: 17px;">Report Invoice({{ date('d-M-Y',strtotime($start_date)) }} & {{ date('d-M-Y',strtotime($end_date)) }})</span></strong></u></td>
+                        <td> <u><strong><span style="font-size: 17px;">Rapport facture({{ date('d-M-Y',strtotime($start_date)) }} & {{ date('d-M-Y',strtotime($end_date)) }})</span></strong></u></td>
                         <td></td>
                     </tr>
                  </tbody>
@@ -49,11 +49,11 @@
                 <thead>
                 <tr>
                   <th>NI</th>
-                  <th>Invoice  No</th>
-                  <th>Customer Name</th>
+                  <th>No_facture</th>
+                  <th>Nom client</th>
                   <th>Date</th>
                   <th>Description</th>
-                  <th>total paid</th>
+                  <th>Montant payé</th>
                   {{-- <th>Actions</th> --}}
                 </tr>
                 </thead>
@@ -64,7 +64,7 @@
                     @foreach ($invoices as $key => $invoice)
                      <tr> 
                         <td>{{ $loop->index+1 }}</td>
-                        <td>invoice No#{{ $invoice->invoice_no }}</td>
+                        <td>facture No#{{ $invoice->invoice_no }}</td>
                         <td>
                             {{ $invoice['payment']['customer']['name'] }}_
                             {{ $invoice['payment']['customer']['mobile_no'] }}_

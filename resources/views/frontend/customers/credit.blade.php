@@ -53,6 +53,7 @@ customers
                       <th>Nom client</th>
                       <th>Date</th>
                       <th>Montant du crédit</th>
+                      <th>Status</th>
                       <th>Actions</th>
                     </tr>
                     </thead>
@@ -71,6 +72,13 @@ customers
                             </td>
                             <td>{{ date('d-M-Y',strtotime($payment['customer']['date'])) }}</td>
                             <td>{{ $payment->due_amount }} fcfa</td>
+                            <td>
+                              @if ($payment['customer']['status']=='0')
+                              <span class="badge bg-danger">Non livre</span>
+                              @elseif($payment['customer']['status']=='1')
+                              <span class="badge bg-primary">Livrée</span>
+                              @endif
+                            </td>
                             <td class="d-flex ">
                               <a class="btn btn-xs btn-primary text-white mr-1" href="{{ route('customers.edit.invoice', $payment->invoice_id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
                               <a href="{{ route('invoices.details.pdf',$payment->invoice_id) }}" target="_blank" title="details" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>

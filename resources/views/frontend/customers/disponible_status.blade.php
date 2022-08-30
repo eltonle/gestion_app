@@ -1,5 +1,7 @@
 @extends('frontend.layouts.master')
-
+{{-- @section('sous-title')
+Units
+@endsection --}}
 
 @section('links')
  <!-- DataTables -->
@@ -18,15 +20,14 @@
 
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row ">
+        <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 supprimer cette categorie
-Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
+                <h1 class="m-0">Disponibilité & Livraison</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                    <li class="breadcrumb-item active">clients</li>
+                    <li class="breadcrumb-item active">Status disponibilité & livraison</li>
                 </ol>
             </div>
         </div>
@@ -39,8 +40,8 @@ Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Liste Clients</h3>
-                  <a href="{{ route('customers.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer un client</a>
+                  <h3 class="card-title">Disponibilité & Status des <span class="font-weight-bold">Clients</span> </h3>
+                  {{-- <a href="{{ route('units.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer Unité</a> --}}
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -52,6 +53,8 @@ Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
                       <th>Email</th>
                       <th>Mobile_No</th>
                       <th>Address</th>
+                      <th>Disponible</th>
+                      <th>Livraison</th>
                       <th>Actions</th>
                     </tr>
                     </thead>
@@ -63,28 +66,37 @@ Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
                             <td>{{ $customer->email }}</td>
                             <td>{{ $customer->mobile_no }}</td>
                             <td>{{ $customer->address }}</td>
-                            <td class="d-flex ">
-                              <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('customers.edit', $customer->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
-                              
-      
-                              <form method="POST" action="{{ route('customers.destroy', $customer->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box btn-xs " data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                            </form>
-                              
+                            <td>
+                              @if ($customer->disponible=='0')
+                              <span class="badge bg-danger">Non disponible</span>
+                              @elseif($customer->disponible=='1')
+                              <span class="badge bg-primary">Disponible</span>
+                              @endif
+                            </td>
+                            <td>
+                              @if ($customer->status=='0')
+                              <span class="badge bg-danger">Non livrée</span>
+                              @elseif($customer->status=='1')
+                              <span class="badge bg-primary">Livrée</span>
+                              @endif
+                            </td>
+                            <td >
+                              <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('customers.disponible.status.edit',$customer->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
+         
                             </td>
                           </tr>  
                         @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-                      <th>NI</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Mobile_No</th>
-                      <th>Address</th>
-                      <th>Actions</th>
+                        <th>NI</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Mobile_No</th>
+                        <th>Address</th>
+                        <th>Disponible</th>
+                        <th>Livraison</th>
+                        <th>Actions</th>
                     </tr>
                     </tfoot>
                   </table>
@@ -119,19 +131,19 @@ Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: "voulez-vous supprimer ce client?",
+            title: "voulez-vous supprimer cet unité?",
             text: "Si vous le supprimez, il disparaîtra pour toujours.",
             icon: "warning",
             type: "warning",
             buttons: ["Annuler","Oui!"],
-            confirmButtonColor: '##FF0000',
+            confirmButtonColor: '#D81B60',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Oui, Supprime-le!'
         }).then((willDelete) => {
             if (willDelete) {
                 form.submit();
             }
-        }); 
+        });
     });
 </script>
 

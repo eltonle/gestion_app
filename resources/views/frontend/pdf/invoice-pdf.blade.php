@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>Facture</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
                 <table width="100%">
                    <tbody>
                     <tr>
-                        <td><strong>Invoices No#{{ $invoice->invoice_no }}</strong></td>
+                        <td><strong>Factures No#{{ $invoice->invoice_no }}</strong></td>
                         <td>
                             <span style="font-size: 20px;background: #ddd;">Gescom App Mall</span>
                         </td>
@@ -35,7 +35,7 @@
                  <tbody>
                     <tr>
                         <td width="43%"></td>
-                        <td> <u><strong><span style="font-size: 17px;">Customer Invoice</span></strong></u></td>
+                        <td> <u><strong><span style="font-size: 17px;">Facture client</span></strong></u></td>
                         <td  width="30%"></td>
                     </tr>
                  </tbody>
@@ -51,7 +51,7 @@
                 <table width="100%">
                     <tbody>
                         <tr>
-                            <td width="30%"><strong>Name :</strong>{{ $payment['customer']['name'] }}</td>
+                            <td width="30%"><strong>Nom :</strong>{{ $payment['customer']['name'] }}</td>
                             <td width="30%"><strong>Mobile :</strong>{{ $payment['customer']['mobile_no'] }}</td>
                             <td width="40%"><strong>Address :</strong>{{ $payment['customer']['address'] }}</td>
                         </tr>
@@ -62,10 +62,10 @@
                         <tr class="text-center">
                             <th>NI</th>
                             {{-- <th>Category</th> --}}
-                            <th>Clothes Name</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total Price</th>
+                            <th>Article</th>
+                            <th>Quantite</th>
+                            <th>Prix unitaire</th>
+                            <th>Prix total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,15 +94,15 @@
                             <td class="text-center"><strong>{{ $sum_total }}</strong></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-right">Discount</td>
+                            <td colspan="4" class="text-right">Remise</td>
                             <td class="text-center"><strong>{{ $payment->discount_amount }}</strong></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-right">Paid Amount</td>
+                            <td colspan="4" class="text-right">Montant payé</td>
                             <td class="text-center"><strong>{{ $payment->paid_amount }}</strong></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-right">Due Amount</td>
+                            <td colspan="4" class="text-right">Montant du</td>
                             <td class="text-center"><strong style="color: red;">{{ $payment->due_amount }}</strong></td>
                         </tr>
                         <tr>
@@ -129,7 +129,7 @@
                         </td>
                         <td style="width:20%;"></td>
                         <td style="width:40%;text-align: center;">
-                          <p style="text-align: center;">Customer Signature</p>
+                          <p style="text-align: center;">Signature client</p>
                         </td>
                     </tr>
                  </tbody>

@@ -154,7 +154,7 @@ class InvoiceController extends Controller
             //    return redirect()->route('invoices.pendind.list.index');
             // });
                $invoice->save();
-               Toastr::success('Invoice Approve successfully', 'success');
+               Toastr::success('Facture Approvée avec success', 'success');
                return redirect()->route('invoices.pendind.list.index');
             
         }
@@ -203,7 +203,7 @@ class InvoiceController extends Controller
           Payment::where('invoice_id',$invoice->id)->delete();
           PaymentDetail::where('invoice_id',$invoice->id)->delete();
           
-          Toastr::success('INVOICE DELETE ','success');
+          Toastr::success('Facture annulée avec success ','success');
           return redirect()->route('invoices.pendind.list.index');
         }
 

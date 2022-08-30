@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Backend;
 
+use PDF; 
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Models\InvoiceDetail;
+use App\Models\PaymentDetail;
 use TJGazel\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Customer\CustomerRequest;
 use App\Http\Requests\Invoice\InvoiceUpdateRequest;
-use App\Models\PaymentDetail;
-use PDF; 
+
 class CustomerController extends Controller
 {
     /**
@@ -23,6 +26,17 @@ class CustomerController extends Controller
     {
        $customers = Customer::all();
        return view('frontend.customers.index', compact('customers'));
+    }
+
+    public function disponible_status()
+    {
+       $customers = Customer::all();
+       return view('frontend.customers.disponible_status', compact('customers'));
+    }
+    public function disponible_status_edit($id)
+    {
+      $customer = Customer::find($id);
+      return view('frontend.customers.disponible_status_edit',compact('customer'));
     }
 
     /**
@@ -54,6 +68,32 @@ class CustomerController extends Controller
           }   
           return redirect()->route('customers.index');
     }
+
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_disponible_status(Request $request, $id)
+    {
+
+       $customer = Customer::find($id);
+       $customer -> name = $request->name;
+       $customer -> email = $request->email;
+       $customer -> mobile_no = $request->mobile_no;
+       $customer -> address = $request->address;
+       $customer -> disponible = $request->disponible;
+       $customer -> status = $request->status;
+       $customer -> created_by = Auth::user()->id;
+          if ($customer ->save()) {
+            Toastr::success('Modifier avec success','Success');
+          }   
+          return redirect()->route('customers.disponible.status');
+    }
+     
 
     /**
      * Display the specified resource.
@@ -110,9 +150,17 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         $customer = Customer::find($id); 
+        $take = Payment::where('customer_id',$customer->id)->first()->id;
+        $inv=Invoice::find($take);
+        $pay=PaymentDetail::where('invoice_id',$inv->id)->get();
+        $invdetail=InvoiceDetail::where('invoice_id',$inv->id)->get();
+        $pay->each->delete();
+        $invdetail->each->delete();
+        $inv->delete();
+        $customer->payments()->delete();
 
         if ($customer->delete()) {
-            Toastr::success('Client supprimer avec succès','Success');
+            Toastr::success('Client supprimer avec success','Success');
            }   
          return redirect()->route('customers.index');
     }
@@ -193,7 +241,7 @@ class CustomerController extends Controller
     {
       
       if($request->new_paid_amount<$request->paid_amount){
-        Toastr::error('Soory! you have paid maximun value');
+        Toastr::error('Soory! Somme plus elevée');
         return redirect()->back();
       }else{
         $payment = Payment::where('invoice_id', $invoice_id)->first();
@@ -226,4 +274,4 @@ class CustomerController extends Controller
       return $pdf->stream('document.pdf');
     }
 
-}
+} 

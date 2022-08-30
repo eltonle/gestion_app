@@ -62,10 +62,10 @@ class ProductController extends Controller
        $product->created_by = Auth::user()->id;
       
         if ($product->save()) {
-            Toastr::success('Clothe created successfully','Success');
+            Toastr::success('Article Creer Avec success','Success');
             return redirect()->route('products.index');
         }else {
-            Toastr::error('Clothe cannot be created successfully','Error');
+            Toastr::error('Article Ne Peut Etre Creer','Error');
             return redirect()->back();
         }
  
@@ -113,7 +113,7 @@ class ProductController extends Controller
         $product->updated_by = Auth::user()->id;
 
         $product->save();
-       Toastr::success('Clothe UPDATE successfully','Success');
+       Toastr::success('Article Mis a Jour Avec Success','Success');
        return redirect()->route('products.index');
     }
 
@@ -128,7 +128,7 @@ class ProductController extends Controller
         $product = Product::find($id);
     
         if ($product->delete()) {
-            Toastr::success('Product DELETE successfully','Success');
+            Toastr::success('Article Supprimer Avec Success','Success');
         }
         
         return to_route('products.index');

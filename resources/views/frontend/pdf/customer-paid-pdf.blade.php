@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Paid invoice</title>
+    <title>Facture payée</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
                  <tbody>
                     <tr>
                         <td width="35%"></td>
-                        <td> <u><strong><span style="font-size: 17px;">Paid Customer Report</span></strong></u></td>
+                        <td> <u><strong><span style="font-size: 17px;">Rapport client paiement</span></strong></u></td>
                         <td  width="30%"></td>
                     </tr>
                  </tbody>
@@ -47,10 +47,10 @@
                 <table border="1" width="100%">
                     <thead>
                     <tr>
-                      <th>Invoice No</th>
-                      <th>Customer name</th>
+                      <th>No_facture</th>
+                      <th>Nom client</th>
                       <th>Date</th>
-                      <th>Paid_Amount</th>
+                      <th>Montant payé</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -97,7 +97,7 @@
                         </td>
                         <td style="width:20%;"></td>
                         <td style="width:40%;text-align: center;">
-                          <p style="text-align: center;">Customer Signature</p>
+                          <p style="text-align: center;">Signature client</p>
                         </td>
                     </tr>
                  </tbody>

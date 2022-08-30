@@ -136,14 +136,14 @@ Customers
          var name = $(this).data("name");
          event.preventDefault();
          swal({
-             title: "Are you sure you want to delete this Invoice?",
-             text: "If you delete this, it will be gone forever.",
-             icon: "warning",
-             type: "warning",
-             buttons: ["Cancel","Yes!"],
-             confirmButtonColor: '##FF0000',
-             cancelButtonColor: '#d33',
-             confirmButtonText: 'Yes, delete it!'
+            title: "voulez-vous annuler cette facture?",
+            text: "Si vous le supprimez, il disparaîtra pour toujours.",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Annuler","Oui!"],
+            confirmButtonColor: '#D81B60',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, Supprime-le!'
          }).then((willDelete) => {
              if (willDelete) {
                  form.submit();

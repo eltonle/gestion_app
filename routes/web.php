@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('customer/wise/report',[CustomerController::class, 'wiseReport'])->name('customers.wise.report');
     Route::get('customer/wise/credit/report',[CustomerController::class, 'wiseCredit'])->name('customers.wise.credit.report');
     Route::get('customer/wise/paid/report',[CustomerController::class, 'wisePaid'])->name('customers.wise.paid.report');
+    Route::get('customer/disponible&status',[CustomerController::class, 'disponible_status'])->name('customers.disponible.status');
+    Route::get('customer/disponible&status/{id}',[CustomerController::class, 'disponible_status_edit'])->name('customers.disponible.status.edit');
+    Route::Put('customer/disponible_status/update/{id}',[CustomerController::class , 'update_disponible_status'])->name('customers.disponible.status.update');
    
    
     Route::resource('unit/units',UnitController::class);

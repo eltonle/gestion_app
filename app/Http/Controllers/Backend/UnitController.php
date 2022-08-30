@@ -44,7 +44,7 @@ class UnitController extends Controller
           $unit -> name = $request->name;
           $unit -> created_by = Auth::user()->id;
           if ($unit ->save()) {
-            Toastr::success('Customer CREATED successfully','Success');
+            Toastr::success('Unité Crée ','Success');
           }   
           return redirect()->route('units.index');
     }
@@ -86,7 +86,7 @@ class UnitController extends Controller
         $unit -> updated_by = Auth::user()->id;
         
        if ($unit ->save()) {
-         Toastr::success('Unit UPDATED successfully','Success');
+         Toastr::success('Unité mise a jour ','Success');
         }   
       return redirect()->route('units.index');
     }
@@ -102,7 +102,7 @@ class UnitController extends Controller
          $unit = Unit::find($id); 
 
         if ($unit->delete()) {
-            Toastr::success('Unit DELETE successfully','Success');
+            Toastr::success('Unité supprimée','Success');
            }   
          return redirect()->route('units.index');
     }

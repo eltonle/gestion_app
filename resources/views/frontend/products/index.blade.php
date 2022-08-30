@@ -60,18 +60,23 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->unit->name }}</td>
-                            <td>
-                              <a class="btn btn-xs btn-success text-white" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
+                            <td class="d-flex">
+                              <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
       
-                              <a class="btn  btn-xs btn-danger text-white" href="{{ route('products.destroy', $product->id) }}"
+                              {{-- <a class="btn  btn-xs btn-danger text-white" href="{{ route('products.destroy', $product->id) }}"
                               onclick="event.preventDefault(); document.getElementById('delete-form-{{ $product->id }}').submit();" title="supprimer">
                                  <i class="nav-icon fas fa-trash-alt"></i>
                               </a>
-              
-                              <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: none;">
+               --}}
+                              {{-- <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: none;">
                                   @method('DELETE')
                                   @csrf
-                              </form>
+                              </form> --}}
+                              <form method="POST" action="{{ route('products.destroy', $product->id) }}">
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                            </form>
                             </td>
                           </tr>  
                         @endforeach
@@ -100,6 +105,28 @@
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<script>
+  $('.show-alert-delete-box').click(function(event){
+       var form =  $(this).closest("form");
+       var name = $(this).data("name");
+       event.preventDefault();
+       swal({
+           title: "voulez-vous supprimer cet Article?",
+           text: "Si vous le supprimez, il disparaîtra pour toujours.",
+           icon: "warning",
+           type: "warning",
+           buttons: ["Annuler","Oui!"],
+           confirmButtonColor: '#D81B60',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'Oui, Supprime-le!'
+       }).then((willDelete) => {
+           if (willDelete) {
+               form.submit();
+           }
+       });
+   });
+</script>
 
 <script>
     $(function () {
