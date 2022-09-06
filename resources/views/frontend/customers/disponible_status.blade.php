@@ -68,9 +68,9 @@ Units
                             <td>{{ $customer->address }}</td>
                             <td>
                               @if ($customer->disponible=='0')
-                              <span class="badge bg-danger">Non disponible</span>
+                              <span class="badge bg-danger">Non traité</span>
                               @elseif($customer->disponible=='1')
-                              <span class="badge bg-primary">Disponible</span>
+                              <span class="badge bg-primary">Traité</span>
                               @endif
                             </td>
                             <td>

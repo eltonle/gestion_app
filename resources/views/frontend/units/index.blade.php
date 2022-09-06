@@ -41,7 +41,9 @@ Units
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Liste Unités</h3>
-                  <a href="{{ route('units.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer Unité</a>
+                  @can('create-unit')
+                   <a href="{{ route('units.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer Unité</a>
+                  @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -59,13 +61,16 @@ Units
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $unit->name }}</td>
                             <td class="d-flex ">
-                              <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('units.edit', $unit->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
-         
-                              <form method="POST" action="{{ route('units.destroy', $unit->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                            </form>
+                              @can('edit-unit')
+                                <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('units.edit', $unit->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
+                              @endcan
+                              @can('delete-unit')
+                                <form method="POST" action="{{ route('units.destroy', $unit->id) }}">
+                                  @csrf
+                                  <input name="_method" type="hidden" value="DELETE">
+                                  <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                                </form>
+                              @endcan
                             </td>
                           </tr>  
                         @endforeach
@@ -107,7 +112,7 @@ Units
    $('.show-alert-delete-box').click(function(event){
         var form =  $(this).closest("form");
         var name = $(this).data("name");
-        event.preventDefault();
+        event.preventDefault(); 
         swal({
             title: "voulez-vous supprimer cet unité?",
             text: "Si vous le supprimez, il disparaîtra pour toujours.",

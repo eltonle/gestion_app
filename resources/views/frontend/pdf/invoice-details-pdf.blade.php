@@ -134,7 +134,9 @@
                 @php
                     $date = new DateTime('now', new DateTimezone('Africa/Douala'));
                 @endphp
-                <i>Print time : {{ $date->format('F j, Y, H:i:s') }}</i>
+                <i>Print time : {{ $date->format('F j, Y, H:i:s') }}</i><br>
+                <i class="float-left">Disponible a partir du : {{ date('F j, Y', strtotime('+4 days')) }};</i>
+                
             </div>
         </div>
 

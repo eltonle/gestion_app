@@ -18,13 +18,13 @@ class PermissionTableSeeder extends Seeder
         $permissions = [
  
             [
-                'group_name' => 'admin',
+                'group_name' => 'user',
                 'permissions'=> [
                     // admin
-                    'view-admin',
-                    'create-admin',
-                    'edit-admin',
-                    'delete-admin',
+                    'view-user',
+                    'create-user',
+                    'edit-user',
+                    'delete-user',
                 ]
             ],
 
@@ -51,20 +51,37 @@ class PermissionTableSeeder extends Seeder
             ],
 
             [
-                'group_name' => 'product',
+                'group_name' => 'article',
                 'permissions'=> [
-                    // product
-                    'view-product',
-                    'create-product',
-                    'edit-product',
-                    'delete-product'
+                    // article
+                    'view-article',
+                    'create-article',
+                    'edit-article',
+                    'delete-article'
                 ]
             ],
 
-           
+            [
+                'group_name' => 'unit',
+                'permissions'=> [
+                    // unit
+                    'view-unit',
+                    'create-unit',
+                    'edit-unit',
+                    'delete-unit'
+                ]
+            ],
+            [
+                'group_name' => 'client',
+                'permissions'=> [
+                    // client
+                    'delete-client'
+                ]
+            ],
 
-           
+            
         ];
+        
         foreach ($permissions as $permission) {
             Permission::create(['name'=>$permission]);
         }

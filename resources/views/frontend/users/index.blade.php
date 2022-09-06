@@ -42,7 +42,9 @@ Units
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Liste Utilisateurs</h3>
-                  <a href="{{ route('users.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer Utilisateur</a>
+                  @can('create-user')
+                  <a href="{{ route('users.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer Utilisateur</a>           
+                  @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -72,21 +74,24 @@ Units
                               </div>
                             </td>
                             <td class="d-flex ">
-                              <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('users.edit', $user->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
-      
-                              <form method="POST" action="{{ route('users.destroy', $user->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='supprimer' @if ($user->id==1) disabled
-                                    
-                                @endif><i class="fa fa-trash"></i></button>
-                              </form>
+                              @can('edit-user')
+                                <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('users.edit', $user->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
+                              @endcan
+                              @can('delete-user')
+                                <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                                  @csrf
+                                  <input name="_method" type="hidden" value="DELETE">
+                                  <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='supprimer' @if ($user->id==1) disabled
+                                      
+                                  @endif><i class="fa fa-trash"></i></button>
+                                </form>
+                              @endcan
                             </td>
                           </tr>  
                         @endforeach
                     </tbody>
                     <tfoot>
-                    <tr>
+                    <tr> 
                       {{-- <th>NI</th>
                       <th>Name</th>
                       <th>Actions</th> --}}

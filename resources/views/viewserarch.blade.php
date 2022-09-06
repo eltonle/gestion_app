@@ -14,18 +14,18 @@
 
     <div class="content">
        <div class="container-fluid">
-        
            {{-- <div class="col-md-4"></div> --}}
            <form method="GET" action="{{ route('infos.filter') }}">
             <div class="row mb-2">
               <div class="col-md-7"></div>
               <div class="col-md-3">
                 <select name="search_id" id="" class="form-control-sm form-control">
-                  <option value="aujourdhui"@if ($hidden)selected @endif>Aujourd'hui</option>
-                  <option value="7">Les 7 derniers jours</option>
-                  <option value="30">Les 30 derniers jours</option>
-                  <option value="mois_dernier">Le mois dernier</option>
-                  <option value="ce_mois">Ce mois-çi</option>
+            
+                  <option value="aujourdhui" @if ($dayselect=="aujourdhui") selected @endif>Aujourd'hui</option>
+                  <option value="7"@if ($dayselect=="7") selected @endif>Les 7 derniers jours</option>
+                  <option value="30"@if ($dayselect=="30") selected @endif>Les 30 derniers jours</option>
+                  <option value="mois_dernier" @if ($dayselect=="mois_dernier") selected @endif>Le mois dernier</option>
+                  <option value="ce_mois" @if ($dayselect=="ce_mois") selected @endif>Ce mois-çi</option>
                 </select>
               </div>
               <div class="col-md-2">
@@ -153,7 +153,6 @@
            
          </div>
       
-        </div>
-
-</div>
+       </div>
+   </div>
 @endsection

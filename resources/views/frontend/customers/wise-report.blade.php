@@ -57,7 +57,7 @@ customers
                         <div class="col-sm-8">
                             <label for="">Nom du client Crédit</label>
                             <select name="customer_id" value="supplier_value" class="form-control select2">
-                               <option value="">select customer</option>
+                               <option value="">nom du client</option>
                                @foreach ($customers as $customer)
                                    <option value="{{ $customer->id }}">{{ $customer->name }}({{ $customer->mobile_no }}-{{ $customer->address }})</option>
                                @endforeach
@@ -76,7 +76,7 @@ customers
                          <div class="col-sm-8">
                            <label for="">Nom du client Payé</label>
                            <select name="customer_id" value="" class="form-control select2">
-                              <option value="">select</option>
+                              <option value="">nom du client</option>
                               @foreach ($customers as $customer)
                                <option value="{{ $customer->id }}">{{ $customer->name }}({{ $customer->mobile_no }}-{{ $customer->address }})</option>
                               @endforeach

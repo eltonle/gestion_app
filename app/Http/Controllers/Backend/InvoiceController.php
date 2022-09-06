@@ -192,8 +192,7 @@ class InvoiceController extends Controller
            $pdf->SetProtection(['copy','print'], '', 'pass');
            return $pdf->stream('document.pdf');
         }
-
-
+ 
 
         public function destroy($id)
         {

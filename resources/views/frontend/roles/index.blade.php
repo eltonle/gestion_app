@@ -41,7 +41,9 @@ Units
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Liste Roles & Permissions</h3>
-                  <a href="{{ route('roles.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Add Roles & Permissions</a>
+                  @can('create-role')
+                    <a href="{{ route('roles.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Add Roles & Permissions</a>
+                  @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -67,19 +69,21 @@ Units
                                 @endforeach
                             </td>
                             <td class="d-flex ">
-                              <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('roles.edit', $role->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
-                              {{-- <a href="{{ route('Units.destroy', $uniti->id) }}" title="delete" class="btn btn-danger btn-sm delete-confirm"><i class="fa fa-trash"></i></a> --}}
-      
-                              <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" @if ($role->name=='superadmin')disabled
-                                    
-                                @endif data-toggle="tooltip" title='supprimer'><i class="fa fa-trash"></i></button>
-                            </form>
-                            </td>
+                                @can('edit-role')
+                                  <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('roles.edit', $role->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
+                                @endcan
+                                @can('delete-role')
+                                    <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" @if ($role->name=='superadmin')disabled
+                                            
+                                        @endif data-toggle="tooltip" title='supprimer'><i class="fa fa-trash"></i></button>
+                                    </form>
+                                @endcan
+                           </td>
                           </tr>  
-                        @endforeach 
+                        @endforeach  
                     </tbody>
                     <tfoot>
                     <tr>

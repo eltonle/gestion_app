@@ -20,21 +20,19 @@ class RolePermissionSeeder extends Seeder
         //create roles
         $roleSuperAdmin = Role::create(['name'=>'superadmin']);
         $roleAdmin = Role::create(['name'=>'admin']);
-        $roleEditor = Role::create(['name'=>'editor']);
-        $roleUser = Role::create(['name'=>'user']);
         $roleCaisser = Role::create(['name'=>'caisser']);
-        $roleClient = Role::create(['name'=>'client']);
+
 
         $permissions = [
  
             [
-                'group_name' => 'admin',
+                'group_name' => 'user',
                 'permissions'=> [
                     // admin
-                    'view-admin',
-                    'create-admin',
-                    'edit-admin',
-                    'delete-admin',
+                    'view-user',
+                    'create-user',
+                    'edit-user',
+                    'delete-user',
                 ]
             ],
 
@@ -61,16 +59,82 @@ class RolePermissionSeeder extends Seeder
             ],
 
             [
-                'group_name' => 'product',
+                'group_name' => 'article',
                 'permissions'=> [
-                    // product
-                    'view-product',
-                    'create-product',
-                    'edit-product',
-                    'delete-product'
+                    // article
+                    'view-article',
+                    'create-article',
+                    'edit-article',
+                    'delete-article'
                 ]
-            ],      
+            ],
+
+            [
+                'group_name' => 'unit',
+                'permissions'=> [
+                    // unit
+                    'view-unit',
+                    'create-unit',
+                    'edit-unit',
+                    'delete-unit'
+                ]
+            ],
+            [
+                'group_name' => 'client',
+                'permissions'=> [
+                    // client
+                    'delete-client'
+                ]
+            ],
+
+            
         ];
+        // $permissions = [
+ 
+        //     [
+        //         'group_name' => 'admin',
+        //         'permissions'=> [
+        //             // admin
+        //             'view-admin',
+        //             'create-admin',
+        //             'edit-admin',
+        //             'delete-admin',
+        //         ]
+        //     ],
+
+        //      [
+        //         'group_name' => 'role',
+        //         'permissions'=> [
+        //             // role
+        //             'view-role',
+        //             'create-role',
+        //             'edit-role',
+        //             'delete-role',
+        //         ]
+        //     ],
+
+        //     [
+        //         'group_name' => 'category',
+        //         'permissions'=> [
+        //             // category
+        //             'view-category',
+        //             'create-category',
+        //             'edit-category',
+        //             'delete-category'
+        //         ]
+        //     ],
+
+        //     [
+        //         'group_name' => 'product',
+        //         'permissions'=> [
+        //             // product
+        //             'view-product',
+        //             'create-product',
+        //             'edit-product',
+        //             'delete-product'
+        //         ]
+        //     ],      
+        // ];
        
 
         // assign permissions

@@ -39,7 +39,9 @@
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Listes Articles</h3>
-                  <a href="{{ route('products.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer article</a>
+                  @can('create-article')
+                   <a href="{{ route('products.create') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-plus"></i> Creer article</a>
+                  @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -61,22 +63,16 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->unit->name }}</td>
                             <td class="d-flex">
-                              <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
-      
-                              {{-- <a class="btn  btn-xs btn-danger text-white" href="{{ route('products.destroy', $product->id) }}"
-                              onclick="event.preventDefault(); document.getElementById('delete-form-{{ $product->id }}').submit();" title="supprimer">
-                                 <i class="nav-icon fas fa-trash-alt"></i>
-                              </a>
-               --}}
-                              {{-- <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: none;">
-                                  @method('DELETE')
+                              @can('create-article')
+                               <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
+                              @endcan
+                              @can('delete-article')
+                                <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                   @csrf
-                              </form> --}}
-                              <form method="POST" action="{{ route('products.destroy', $product->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                            </form>
+                                  <input name="_method" type="hidden" value="DELETE">
+                                  <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                                </form>
+                             @endcan
                             </td>
                           </tr>  
                         @endforeach

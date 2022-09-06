@@ -95,7 +95,8 @@ class CategoryController extends Controller
        if ($category ->save()) {
          Toastr::success('Catégorie mis à jour avec succès','Success');
         }   
-      return redirect()->route('categories.index');}
+       return redirect()->route('categories.index');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -110,5 +111,7 @@ class CategoryController extends Controller
         if ($category->delete()) {
             Toastr::success('Catégorie supprimer avec succès','Success');
            }   
-         return redirect()->route('categories.index');}
+         return redirect()->route('categories.index');
+        
+    }
 }

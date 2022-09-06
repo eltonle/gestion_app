@@ -41,7 +41,9 @@ Customers
             <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Listes Categories</h3>
-                  <a href="{{ route('categories.create') }}" class="btn btn-info btn-sm float-right" title="Creer"><i class="fa fa-plus"></i> Creer categorie</a>
+                  @can('create-category')
+                   <a href="{{ route('categories.create') }}" class="btn btn-info btn-sm float-right" title="Creer"><i class="fa fa-plus"></i> Creer categorie</a>
+                  @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -59,13 +61,16 @@ Customers
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $category->name }}</td>
                             <td class="d-flex ">
-                              <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('categories.edit', $category->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
-      
-                              <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
-                                @csrf
-                                <input name="_method" type="hidden" value="DELETE">
-                                <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                              </form>
+                              @can('edit-category')
+                               <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('categories.edit', $category->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
+                              @endcan
+                              @can('delete-category')
+                                <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
+                                  @csrf
+                                  <input name="_method" type="hidden" value="DELETE">
+                                  <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                                </form>
+                              @endcan
                             </td>
                           </tr>  
                         @endforeach
@@ -120,7 +125,7 @@ Customers
            if (willDelete) {
                form.submit();
            }
-       });
+       }); 
    });
 </script>
 

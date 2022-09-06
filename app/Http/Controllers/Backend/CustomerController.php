@@ -17,6 +17,15 @@ use App\Http\Requests\Invoice\InvoiceUpdateRequest;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('permission:view-user | create-user | edit-user | delete-user', ['only'=>['index']]);
+        // $this->middleware('permission:create-user', ['only'=>['create','store']]);
+        // $this->middleware('permission:edit-user', ['only'=>['edit','update']]);
+        $this->middleware('permission:delete-client', ['only'=>['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

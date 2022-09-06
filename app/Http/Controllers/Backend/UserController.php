@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use TJGazel\Toastr\Facades\Toastr;
+use App\Http\Controllers\Controller;
 use Illuminate\support\Facades\Hash;
 
 
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::all();
         return view('frontend.users.index', compact('users'));
     }
 
@@ -67,8 +68,8 @@ class UserController extends Controller
         if ($request->roles) {
             $user->assignRole($request->roles);
         }
-           
-        return back()->with('status', 'User has been created !!');
+        Toastr::success('Utilisateur Creer avec success','Success');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -127,7 +128,8 @@ class UserController extends Controller
            $user->assignRole($request->roles);
        }
 
-       return back()->with('status', 'User has been updated !!');
+       Toastr::success('Utilisateur mis à jour avec succès','Success');
+       return redirect()->route('users.index');
     }
 
     /**
@@ -143,7 +145,8 @@ class UserController extends Controller
             $user->delete();
         }
 
-        return back()->with('status', 'User has been deleted !!');
+        Toastr::success('Utilisateur Supprimé ','Success');
+        return redirect()->route('users.index');
     
     }
 }

@@ -18,10 +18,10 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:view-product | create-product | edit-product | delete-product', ['only'=>['index']]);
-        $this->middleware('permission:create-product', ['only'=>['create','store']]);
-        $this->middleware('permission:edit-product', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-product', ['only'=>['destroy']]);
+        $this->middleware('permission:view-article | create-article | edit-article | delete-article', ['only'=>['index']]);
+        $this->middleware('permission:create-article', ['only'=>['create','store']]);
+        $this->middleware('permission:edit-article', ['only'=>['edit','update']]);
+        $this->middleware('permission:delete-article', ['only'=>['destroy']]);
     }
 
     /**

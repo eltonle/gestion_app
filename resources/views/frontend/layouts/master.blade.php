@@ -56,7 +56,7 @@
                 Anything you want
             </div>
 
-            <strong>Copyright &copy;2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy;2022 <a href="https://localhostkmer.xyz/" target="_blank"><span style="color: rgb(255, 47, 0);">LocalHost</span> <span class="text-black">Digital</span></a>.</strong> All rights reserved.
         </footer>
     </div>
 

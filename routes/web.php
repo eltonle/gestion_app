@@ -16,13 +16,17 @@ use App\Http\Controllers\Backend\VetementController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+ 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 Route::group(['middleware' => ['auth']], function(){
-    
+    //search filter in home
+    Route::get('/home/search/filter', [App\Http\Controllers\HomeController::class, 'filter'])->name('infos.filter');
+
+
     Route::resource('roles',RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('category/categories', CategoryController::class);
