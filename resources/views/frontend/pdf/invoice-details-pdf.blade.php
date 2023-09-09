@@ -59,11 +59,11 @@
                 </table> 
             </div>
             <div class="col-md-12">
-                <table border="1" width="100%" style="margin-bottom: 10px;">
+                <table border="1" width="100%" style="margin-bottom: 10px;" cellspacing="0">
                     <thead >
                         <tr class="text-center">
                             <th>NI</th>
-                            {{-- <th>Category</th> --}}
+                            <!-- <th>Category</th>  -->
                             <th>Article</th>
                             <th>Quantite</th>
                             <th>Prix unitaire</th>

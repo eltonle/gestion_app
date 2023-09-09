@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::resource('roles',RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('category/categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class);
     Route::resource('products',ProductController::class);
     Route::resource('customer/customers',CustomerController::class);
     Route::get('customer/credit',[CustomerController::class, 'creditcustomer'])->name('customers.credit');
@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::Put('customer/disponible_status/update/{id}',[CustomerController::class , 'update_disponible_status'])->name('customers.disponible.status.update');
    
    
-    Route::resource('unit/units',UnitController::class);
+    // Route::resource('unit/units',UnitController::class);
     Route::get('master/vetements',[VetementController::class, 'index'])->name('vetements.index');
     Route::get('get-product',[DefaultController::class, 'getProduct'])->name('get-product');
 
@@ -55,7 +55,8 @@ Route::group(['middleware' => ['auth']], function(){
        Route::get('view',[InvoiceController::class , 'index'])->name('invoices.index');
        Route::get('create',[InvoiceController::class , 'create'])->name('invoices.create');
        Route::post('store',[InvoiceController::class , 'store'])->name('invoices.store');
-    //    Route::post('edit/{id}',[InvoiceController::class , 'edit'])->name('invoices.edit');
+       Route::get('edit/{id}',[InvoiceController::class , 'edit'])->name('invoices.edit');
+       Route::put('update/{id}',[InvoiceController::class , 'update'])->name('invoices.update');
        Route::get('pending',[InvoiceController::class , 'pendingList'])->name('invoices.pendind.list.index');
        Route::get('approve/{id}',[InvoiceController::class ,'approvedInvoice'])->name('invoices.approve');
        Route::delete('delete/{id}',[InvoiceController::class , 'destroy'])->name('invoices.destroy');
@@ -65,4 +66,7 @@ Route::group(['middleware' => ['auth']], function(){
        Route::get('generate/report',[InvoiceController::class , 'report'])->name('invoices.report');
        Route::get('generate/report/pdf',[InvoiceController::class , 'reportpdf'])->name('invoices.report.pdf');
     });
+
+    Route::get('/getPayments', [InvoiceController::class, 'getInvoicePayment'])->name('modalDetails');
+    Route::post('/update-payment',[InvoiceController::class, 'updatePayment'])->name('update-payment');
 }); 

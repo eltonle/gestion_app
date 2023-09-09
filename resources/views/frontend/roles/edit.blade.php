@@ -33,7 +33,7 @@
           <div class="card card-primary">
             <div class="card-header">
               <h4 >Editer Role & Permissions
-                 <a href="{{ route('units.index') }}" class="btn btn-success float-right btn-md">
+                 <a href="{{ route('roles.index') }}" class="btn btn-success float-right btn-md">
                   <i class="fa fa-list"> Liste Role & Permissions </i>
                 </a>
               </h4>

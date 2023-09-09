@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('date');
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->default(0)->comment('0=pending,1=Approve');
+            $table->tinyInteger('livraison')->default(0)->comment('0=progression,1=livre');
             $table->integer('created_by')->nullable();
             $table->integer('approved_by')->nullable();
             $table->timestamps();

@@ -49,7 +49,7 @@
 
                      <div class="form-group col-sm-2">
                         <label for="">No_facture</label>
-                        <input type="text" name="invoice_no" value={{ $invoice_no }} id="invoice_no" class="form-control form-control-sm" readonly style="background-color:#D8FDBA ">
+                        <input type="text" name="invoice_no" value="{{ $invoice_no }}" id="invoice_no" class="form-control form-control-sm" readonly style="background-color:#D8FDBA ">
                      </div>
 
                      <div class="form-group col-sm-2">
@@ -100,13 +100,13 @@
                   </tbody>
                   <tbody>
                     <tr>
-                        <td class="text-right" colspan="4">Discount</td>
-                        <td><input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount text-right" placeholder="enter discount Amount here"></td>
+                        <td class="text-right" colspan="4">Remise</td>
+                        <td><input type="number" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount text-right" placeholder="entrer une Remise ici"></td>
                     </tr>
                      <tr>
                       <td class="text-right" colspan="4" style="color:#ff0000 ">Grand Total</td>
                       <td>
-                        <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control form-control-sm text-right estimated_amount" readonly style="background-color:#D8FDBA ">
+                        <input type="number" name="estimated_amount" value="0" id="estimated_amount" class="form-control form-control-sm text-right estimated_amount" readonly style="background-color:#D8FDBA ">
                       </td>
                       <td></td>
                      </tr>
@@ -115,20 +115,21 @@
                 <br/>
                 <div class="form-row">
                   <div class="form-group col-sm-12">
-                    <textarea name="description" id="description" class="form-control" placeholder="write description here"></textarea>
+                    <textarea name="description" id="description" class="form-control" placeholder="Une legere description ici..."></textarea>
                   </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for=""> Status payement</label>
-                        <select name="paid_status" id="paid_status" class="form-control form-control-sm">
+                        <label for=""> Saisir un  payement</label>
+                        <input type="number" name="paid_amount" id="paid_status" class="form-control form-control-sm" value="0" placeholder="Enter Paid Amount">
+                        <!-- <select name="paid_status" id="paid_status" class="form-control form-control-sm">
                             <option value="">Select status</option>
                             <option value="full_paid">Full Paid</option>
                             <option value="full_due">full Due</option>
                             <option value="partial_paid">Partical Paid</option>
-                        </select>
-                        <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display:none;">
+                        </select> -->
+                        <!-- <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display:none;"> -->
                     </div>
                
 
@@ -139,7 +140,7 @@
                             @foreach ( $customers as $customer  )
                             <option value="{{ $customer->id }}">{{ $customer->name }} ({{ $customer->mobile_no }})-({{ $customer->address }})</option>
                             @endforeach
-                            <option value="0">New_customer</option> 
+                            <option value="0">Enregistrer un nouveau Client</option> 
                             </select>
                     </div>
                 </div>

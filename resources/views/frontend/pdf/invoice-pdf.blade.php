@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Facture</title>
+    <style>
+        td{
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +39,7 @@
                <table>
                  <tbody>
                     <tr>
-                        <td width="43%"></td>
+                        <td width="47%"></td>
                         <td> <u><strong><span style="font-size: 17px;">Facture client</span></strong></u></td>
                         <td  width="30%"></td>
                     </tr>
@@ -57,7 +62,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <table border="1" width="100%">
+                <table border="1" width="100%" cellspacing="0">
                     <thead>
                         <tr class="text-center">
                             <th>NI</th>
@@ -79,11 +84,11 @@
                             <input type="hidden" name="selling-qty[{{ $details->id }}]"
                                 value="{{ $details->selling_qty }}">
                             <td>{{ $key+1 }}</td>
-                            {{-- <td>{{ $details['category']['name'] }}</td> --}}
+                            <!-- <td>{{ $details['category']['name'] }}</td>  -->
                             <td>{{ $details['product']['name'] }}</td>
                             <td>{{ $details->selling_qty }}</td>
-                            <td>{{ $details->unit_price }}</td>
-                            <td>{{ $details->selling_price }}</td>
+                            <td>{{ $details->unit_price }} FCFA</td>
+                            <td>{{ $details->selling_price }} FCFA</td>
                         </tr>
                         @php
                         $sum_total = $sum_total + $details->selling_price
@@ -91,23 +96,23 @@
                         @endforeach
                         <tr>
                             <td colspan="4" class="text-right"><strong>Total</strong></td>
-                            <td class="text-center"><strong>{{ $sum_total }}</strong></td>
+                            <td class="text-center"><strong>{{ $sum_total }} FCFA</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Remise</td>
-                            <td class="text-center"><strong>{{ $payment->discount_amount }}</strong></td>
+                            <td class="text-center"><strong>{{ $payment->discount_amount }} FCFA</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Montant payé</td>
-                            <td class="text-center"><strong>{{ $payment->paid_amount }}</strong></td>
+                            <td class="text-center"><strong>{{ $payment->paid_amount }} FCFA</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Montant du</td>
-                            <td class="text-center"><strong style="color: red;">{{ $payment->due_amount }}</strong></td>
+                            <td class="text-center"><strong style="color: red;">{{ $payment->due_amount }} FCFA</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right"><strong>Grand Total</strong></td>
-                            <td class="text-center"><strong>{{ $payment->total_amount }}</strong></td>
+                            <td class="text-center"><strong>{{ $payment->total_amount }} FCFA</strong></td>
                         </tr>
                     </tbody>
                 </table>

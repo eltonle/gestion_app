@@ -45,9 +45,9 @@ customers
                 <div class="card-body">
                  <div class="row">
                     <div class="col-md-12 text-center">
-                        <strong>Rapport de crédit client avisé</strong>
+                        <strong>Bilan de Crédit Client</strong>
                         <input type="radio" name="customer_wise_report" value="customer_wise_credit" class="search_value"> &nbsp;&nbsp;
-                        <strong>Rapport payé par le client</strong>
+                        <strong>Bilan de paiement Client</strong>
                         <input type="radio" name="customer_wise_report" value="customer_wise_paid"  class="search_value">
                     </div>
                 </div> 

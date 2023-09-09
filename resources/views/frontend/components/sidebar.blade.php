@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary ">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link bg-primary text-center">
       
@@ -48,28 +48,9 @@
                       </a>
                    </li>
                   @endcan 
-                  @can('view-unit')
-                    <li class="nav-item {{ Route::is('unit')  ? 'menu-open' : '' }}">
-                      <a href="#" class="nav-link {{ Route::is('units.index')  || Route::is('units.edit') || Route::is('units.create') || Route::is('units.update') || Route::is('units.delete') ? 'active' : '' }}">
-                        {{-- <i class="nav-icon fas fa-copy"></i> --}}
-                        <i class="nav-icon fas fa-adjust"></i>
-                        <p>
-                          Unités
-                          <i class="right fas fa-angle-left"></i>
-                        </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                          <a href="{{ route('units.index') }}" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Voir Unités</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </li> 
-                  @endcan
+                  
                   @can('view-category')
-                    <li class="nav-item {{ Route::is('category')  ? 'menu-open' : '' }}">
+                    <li class="nav-item {{ Route::is('categories*')  ? 'menu-open' : '' }}">
                       <a href="#" class="nav-link {{ Route::is('categories.index')  || Route::is('categories.edit') || Route::is('categories.create') || Route::is('categories.update') || Route::is('categories.delete') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-blog"></i>
                         <p>
@@ -79,16 +60,22 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="{{ route('categories.index') }}" class="nav-link active">
+                          <a href="{{ route('categories.index') }}" class="nav-link {{ Route::is('categories.index')  || Route::is('categories.edit') || Route::is('categories.update') || Route::is('categories.delete') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Voir Categories</p>
+                            <p>Voir Categories </p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{ route('categories.create') }}" class="nav-link {{ Route::is('categories.create')  ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ajouter une categorie</p>
                           </a>
                         </li>
                       </ul>
                     </li>
                   @endcan
                   @can('view-article')
-                    <li class="nav-item {{ Route::is('product')  ? 'menu-open' : '' }}">
+                    <li class="nav-item {{ Route::is('products*')  ? 'menu-open' : '' }}">
                       <a href="#" class="nav-link {{ Route::is('products.index')  || Route::is('products.edit') || Route::is('products.create') || Route::is('products.update') || Route::is('products.delete') ? 'active' : '' }}">
                         {{-- <i class="nav-icon fas fa-th-large"></i> --}}
                         <i class="nav-icon fas fa-shopping-basket"></i>
@@ -99,16 +86,23 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="{{ route('products.index') }}" class="nav-link active">
+                          <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.index')  || Route::is('products.edit') || Route::is('products.update') || Route::is('products.delete') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Voir les Articles</p>
+                            <p>Voir les articles</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('product.create')  ? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Creer un article</p>
                           </a>
                         </li>
                       </ul>
                     </li>
                   @endcan
-                <li class="nav-item {{ Route::is('customer')  ? 'menu-open' : '' }}">
-                  <a href="#" class="nav-link {{ Route::is('customers.index')  || Route::is('customers.edit') || Route::is('customers.create') || Route::is('customers.update') || Route::is('customers.delete') || Route::is('customers.credit') || Route::is('customers.paid') || Route::is('customers.wise.report') || Route::is('customers.disponible.status') ? 'active' : '' }}">
+                <!-- <li class="nav-item {{ Route::is('customer')  ? 'menu-open' : '' }}"> -->
+                <li class="nav-item {{ Route::is('customers.index')  || Route::is('customers.edit') || Route::is('customers.create') || Route::is('customers.update') || Route::is('customers.delete')  || Route::is('customers.disponible.status') ? 'menu-open' : '' }}">
+                  <a href="#" class="nav-link {{ Route::is('customers.index')  || Route::is('customers.edit') || Route::is('customers.create') || Route::is('customers.update') || Route::is('customers.delete')  || Route::is('customers.disponible.status') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-people-arrows"></i>
                     <p>
                       Clients 
@@ -119,73 +113,102 @@
                     
                     <li class="nav-item">
                       <a href="{{ route('customers.index') }}" class="nav-link {{ Route::is('customers.index')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
+                      <i class="fas fa-arrow-right mr-2"></i>
                         <p>Voir Clients</p>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a href="{{ route('customers.credit') }}" class="nav-link {{ Route::is('customers.credit')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Credit Clients</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{{ route('customers.paid') }}" class="nav-link {{ Route::is('customers.paid')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Payement Client</p>
-                      </a>
-                    </li>
+                   
+                    
                     <li class="nav-item">
                       <a href="{{ route('customers.disponible.status') }}" class="nav-link {{ Route::is('customers.disponible.status')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
+                      <i class="fas fa-arrow-right mr-2"></i>
                         <p>Disponibilité & Status</p>
                       </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{{ route('customers.wise.report') }}" class="nav-link {{ Route::is('customers.wise.report')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Rapport client avisé</p>
-                      </a>
-                    </li>
+                    </li>                   
                   </ul>
                 </li>
 
                 
 
-                <li class="nav-item {{ Route::is('invoice')  ? 'menu-open' : '' }}">
-                  <a href="#" class="nav-link {{ Route::is('invoices.index')  || Route::is('invoices.pendind.list.index') || Route::is('invoices.create') || Route::is('invoices.print.list') || Route::is('invoices.delete') || Route::is('invoices.report') ? 'active' : '' }}">
+                <li class="nav-item {{  Route::is('invoices.index')  || Route::is('invoices.pendind.list.index') || Route::is('invoices.create') || Route::is('invoices.edit') || Route::is('invoices.print.list') || Route::is('invoices.delete')   ? 'menu-open' : '' }}">
+                  <a href="#" class="nav-link {{ Route::is('invoices.index')  || Route::is('invoices.pendind.list.index') || Route::is('invoices.create') || Route::is('invoices.edit') || Route::is('invoices.print.list') || Route::is('invoices.delete')  ? 'active' : '' }}">
   
                     <i class="nav-icon fas fa-balance-scale"></i>
                     <p>
-                      Facture recouvrement
+                      Gestion des Factures
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview"> 
+                    <li class="nav-item">
+                      <a href="{{ route('invoices.create') }}" class="nav-link {{ Route::is('invoices.create')  ? 'active' : '' }}">
+                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                        <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Creer une Facture</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ route('invoices.index') }}" class="nav-link {{ Route::is('invoices.index')  ? 'active' : '' }}">
+                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                        <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Suivi des Factures</p>
+                      </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                      <a href="{{ route('invoices.index') }}" class="nav-link {{ Route::is('invoices.index')  ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Listes des Factures</p>
+                      </a>
+                    </li> -->
+                    <li class="nav-item">
+                      <a href="{{ route('invoices.pendind.list.index') }}" class="nav-link {{ Route::is('invoices.pendind.list.index')  ? 'active' : '' }}">
+                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                        <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Facture en attente</p>
+                      </a>
+                    </li>
+                  
+                    
+                  </ul>
+                </li>
+              
+                <!-- <li class="nav-item {{ Route::is('customer')  ? 'menu-open' : '' }}"> -->
+                <li class="nav-item {{   Route::is('customers.credit') || Route::is('customers.paid') || Route::is('customers.wise.report') || Route::is('invoices.report')  ? 'menu-open' : '' }}">
+                  <a href="#" class="nav-link {{   Route::is('customers.credit') || Route::is('customers.paid') || Route::is('customers.wise.report')|| Route::is('invoices.report')  ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-people-arrows"></i>
+                    <p>
+                     Rapport  quotidien 
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
+                                        
                     <li class="nav-item">
-                      <a href="{{ route('invoices.index') }}" class="nav-link {{ Route::is('invoices.index')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Creer & Voir  facture</p>
+                      <a href="{{ route('customers.credit') }}" class="nav-link {{ Route::is('customers.credit')  ? 'active' : '' }}">
+                      <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Credit des Clients</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="{{ route('invoices.pendind.list.index') }}" class="nav-link {{ Route::is('invoices.pendind.list.index')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Facture Approuvée</p>
+                      <a href="{{ route('customers.paid') }}" class="nav-link {{ Route::is('customers.paid')  ? 'active' : '' }}">
+                      <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Paiement des Clients</p>
                       </a>
-                    </li>
+                    </li>    
+                      
                     <li class="nav-item">
-                      <a href="{{ route('invoices.print.list') }}" class="nav-link {{ Route::is('invoices.print.list')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Imprimer Facture</p>
+                      <a href="{{ route('customers.wise.report') }}" class="nav-link {{ Route::is('customers.wise.report')  ? 'active' : '' }}">
+                      <i class="fas fa-arrow-right mr-2"></i>
+                        <p>État financier client</p>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a href="{{ route('invoices.report') }}" class="nav-link {{ Route::is('invoices.report')  ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Rapport Quotidien</p>
+                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                        <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Analyse Chronologique </p>
                       </a>
-                    </li>
+                    </li> 
                   </ul>
                 </li>
 

@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Paiement client pdf</title>
+    <style>
+        td{
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,8 +39,8 @@
                  <tbody>
                     <tr>
                         <td width="35%"></td>
-                        <td> <u><strong><span style="font-size: 17px;">Rapport de client PDF</span></strong></u></td>
-                        <td  width="30%"></td>
+                        <td> <u><strong><span style="font-size: 17px;">Relevé des paiements client PDF</span></strong></u></td>
+                        <td  width="25%"></td>
                     </tr>
                  </tbody>
                </table>
@@ -44,7 +49,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <table border="1" width="100%">
+                <table border="1" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                       <th> No_facture</th>
@@ -65,8 +70,8 @@
                                 {{ $payment['customer']['mobile_no'] }}_
                                 {{ $payment['customer']['address'] }})
                             </td>
-                            <td>{{ date('d-M-Y',strtotime($payment['customer']['date'])) }}</td>
-                            <td>{{ $payment->paid_amount }} fcfa</td>
+                            <td>{{ date('d-M-Y',strtotime($payment['invoice']['date'])) }}</td>
+                            <td>{{ $payment->paid_amount }} FCFA</td>
                             @php
                             $total_paid +=  $payment->paid_amount
                             @endphp
@@ -74,7 +79,7 @@
                         @endforeach
                         <tr>
                             <td colspan="3" style="text-align: right;"><strong>Grand Total</strong></td>
-                            <td style="color: red;"><strong>{{ $total_paid }}</strong> fcfa</td>
+                            <td style="color: red;"><strong>{{ $total_paid }}</strong> FCFA</td>
                         </tr>
                     </tbody>
                  </table>

@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rapport facturation</title>
+    <style>
+      td{
+        text-align: center;
+      }
+    </style>
 </head>
 
 <body>
@@ -45,7 +50,7 @@
 
         <div class="row">
           <div class="col-md-12">
-            <table border="1" width=100%>
+            <table border="1" width=100% cellspacing="0">
                 <thead>
                 <tr>
                   <th>NI</th>
@@ -73,7 +78,7 @@
                         <td>{{ date('d-M-Y',strtotime($invoice->date))}}</td>
             
                         <td>{{ $invoice->description }}</td>
-                        <td>{{ $invoice['payment']['total_amount'] }}</td>
+                        <td>{{ $invoice['payment']['total_amount'] }} FCFA</td>
                          @php
                              $total_sum += $invoice['payment']['total_amount'];
                          @endphp
@@ -82,7 +87,7 @@
                     <tr>
                         <td colspan="5" style="text-align: right;font-weight:bold;">Grand total</td>
                         <td>
-                          <span style="color:red;">{{ $total_sum }}</span> 
+                          <span style="color:red;">{{ $total_sum }} FCFA</span> 
                         </td>
                     </tr>
                 </tbody>

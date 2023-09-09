@@ -61,16 +61,7 @@ class PermissionTableSeeder extends Seeder
                 ]
             ],
 
-            [
-                'group_name' => 'unit',
-                'permissions'=> [
-                    // unit
-                    'view-unit',
-                    'create-unit',
-                    'edit-unit',
-                    'delete-unit'
-                ]
-            ],
+          
             [
                 'group_name' => 'client',
                 'permissions'=> [
