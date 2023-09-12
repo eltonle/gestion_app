@@ -29,7 +29,8 @@
       <!-- Select2 -->
         <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-
+       <!-- CDN ChartsJS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      @yield('links')
     @yield('css')
     @vite(['reources/js/app.js'])
@@ -57,7 +58,7 @@
                 Anything you want
             </div>
 
-            <strong>Copyright &copy;2022 <a href="https://localhostkmer.xyz/" target="_blank"><span style="color: rgb(255, 47, 0);">LocalHost</span> <span class="text-black">Digital</span></a>.</strong> All rights reserved.
+            <strong>Copyright &copy;2023 <a href="https://localhostkmer.xyz/" target="_blank"><span style="color: rgb(255, 47, 0);">LocalHost</span> <span class="text-black">Digital</span></a>.</strong> All rights reserved.
         </footer>
     </div>
 

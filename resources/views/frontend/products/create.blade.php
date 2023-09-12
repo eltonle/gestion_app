@@ -53,19 +53,9 @@
                         <div class="error red">{{ $message }}</div>
                         @enderror
                      </div>
-                     <div class="form-group col-md-6">
-                      <label for="name">Unit</label>
-                      <select name="unit_id" id="" class="form-control @error('unit_id') is-invalid @enderror">
-                        @foreach ($units as $unit)
-                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                        @endforeach
-                      </select>
-                      @error('unit_id')
-                      <div class="error red">{{ $message }}</div>
-                      @enderror
-                   </div>
+                     
                    
-                     <div class="form-group col-md-12">
+                     <div class="form-group col-md-6">
                         <label for="name">Nom</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
                         @error('name')

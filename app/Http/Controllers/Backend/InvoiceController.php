@@ -254,25 +254,13 @@ class InvoiceController extends Controller
 
     public function approvedStore(Request $request, $id)
     {
-        // foreach ($request->selling_qty as $key => $val) {
-        //     $invoice_details = InvoiceDetail::where('id',$key)->first();
-        //     // $product_name = Product::where('id',$invoice_details->product_id)->first();
-        // }
         $invoice = Invoice::find($id);
         $invoice->approved_by = Auth::user()->id;
         $invoice->status = '1';
-        // DB::transaction(function() use($request,$invoice,$id){
-        //    foreach ($request->selling_qty as $key => $val) {
-        //      $invoice_details = InvoiceDetail::where('id',$key)->first(); 
-        //      $product = Product::where('id',$invoice_details->product_id)->first();
-        //      $product->save();
-        //    }
-        //    $invoice->save();
-        //    return redirect()->route('invoices.pendind.list.index');
-        // });
+       
         $invoice->save();
         Toastr::success('Facture Approvée avec success', 'success');
-        return redirect()->route('invoices.pendind.list.index');
+        return redirect()->route('invoices.index');
     }
 
     public function printInvoiceList()
@@ -339,6 +327,18 @@ class InvoiceController extends Controller
         ]);
     }
 
+    // recuperation du status de livraison
+    public function getInvoiceDelivrery(Request $request)
+    {
+        $invoiceId = $request->input('invoice_id');
+        $statusDelivrery = Invoice::where('id', $invoiceId)->first();
+
+        return response()->json([
+            'statusDelivrery' => $statusDelivrery,
+            'invoiceId' => $invoiceId,
+        ]);
+    }
+
     // mettre a jour les paiements
     public function updatePayment(Request $request)
     {
@@ -353,7 +353,7 @@ class InvoiceController extends Controller
         $payment->due_amount = $existDueAmount - $paidAmount;
         if ($existDueAmount == $paidAmount) {
             $payment->paid_status = 'full_paid';
-            $invoiceUpdate->livraison = '1';
+            $invoiceUpdate->livraison = '0';
         }
         DB::transaction(
             function () use ($request, $payment) {
@@ -376,5 +376,33 @@ class InvoiceController extends Controller
         // Effectuez les opérations nécessaires pour mettre à jour les champs dans la base de données
 
         return response()->json(['message' => 'Paiement effectue avec succès .']);
+    }
+
+    public function updateDelivrery(Request $request)
+    {
+        $invoiceId = $request->input('invoice_id');
+        $livraison = $request->input('livraison');
+        $paidAmount = Payment::where('invoice_id',$invoiceId)->first()->paid_amount;
+        $totalAmount = Payment::where('invoice_id',$invoiceId)->first()->total_amount;
+
+        if ($livraison == "1"&& $paidAmount === $totalAmount) {
+            DB::table('invoices')
+            ->where('id',$invoiceId)
+            ->update([
+                'livraison'=> $livraison
+            ]);
+            return response()->json([
+                'message' => 'Status modifie avec succès ✔️ .',
+                'error'  => ''
+            ]);
+        }else {
+            return response()->json([
+                'error' => '⌛ Echec:Veuillez payer de votre dette ⌛ .',
+                'message'=> ''
+            ]);
+        }
+       
+       
+
     }
 }

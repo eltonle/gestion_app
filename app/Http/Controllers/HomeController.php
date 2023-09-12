@@ -133,4 +133,16 @@ class HomeController extends Controller
        }
     }
 
+    public function chartData($year)
+    {
+        $data = DB::table('payments')
+        ->whereYear('created_at', $year)
+        ->get();
+        $payDetail = DB::table('payment_details')
+                     ->whereYear('created_at',$year)->get();
+
+    return response()->json([
+        $data,$payDetail
+    ]);
+    }
 }

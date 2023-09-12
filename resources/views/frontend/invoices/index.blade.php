@@ -67,8 +67,7 @@
                 <td>facture No#{{ $invoice->invoice_no }}</td>
                 <td>
                   {{ $invoice['payment']['customer']['name'] }}_
-                  {{ $invoice['payment']['customer']['mobile_no'] }}_
-                  {{ $invoice['payment']['customer']['address']  }}
+                  {{ $invoice['payment']['customer']['mobile_no'] }}
                 </td>
                 <td>{{ date('d-M-Y',strtotime($invoice->date))}}</td>
 
@@ -91,19 +90,27 @@
                 <td>{{ number_format($invoice['payment']['paid_amount'], 0, ',', ' ') }} FCFA</td>
                 <td>
                   <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-sm btn-flat">Action</button>
+                    <button type="button" class="btn btn-success btn-sm btn-flat">Actions</button>
                     <button type="button" class="btn btn-success btn-xs btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item alert-link" href="{{ route('invoices.edit', $invoice->id) }}"><i class="fa fa-edit"></i> editer</a>
-                      <a class="dropdown-item alert-link" href="{{ route('invoices.print', $invoice->id) }}" target="_bank"><i class="fa fa-print"></i> imprimer</a>
+                      <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.edit', $invoice->id) }}"><i class="fa fa-edit"></i> editer</a>
+                      <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.print', $invoice->id) }}" target="_bank"><i class="fa fa-print"></i> imprimer</a>
 
-                      <a class="dropdown-item alert-link edit-invoice-link" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default">
+                      <a class="dropdown-item alert-link edit-invoice-link text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default">
 
                         <i class="fas fa-donate"></i> les paiements
 
                       </a>
+                      @if ($invoice->livraison === 0 )
+                      <a class="dropdown-item alert-link edit-invoice-delivrery text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default-delivrery">
+
+                        <i class="fas fa-tag"></i> Livraison
+
+                      </a>
+                      @endif
+
 
                       <!-- <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Action3</a> -->
@@ -203,6 +210,52 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
+
+  <!-- MODAL  d'status LIVRAISON -->
+  <div class="modal fade" id="modal-default-delivrery">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div id="showStatusDelivrery">
+            <!-- <h4 class="modal-title">Status de Livraison </h4> -->
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="text-align: center;" class="mb-1">
+            <span style="font-style: italic; color:green;font-weight: bold;" id="payment-message-delivrery"></span>
+            <span style="font-style: italic; color:red;font-weight: bold;" id="payment-message-delivrery-error"></span>
+          </div>
+          <div class="row">
+            <form id="my-form-delivrery">
+              @csrf
+              <input type="hidden" id="invoice-id-input-delivrery" name="invoice_id" value="">
+
+              <span for="">Modifier le status de livraison</span>
+              <br>
+              <select name="livraison" id="delivrery" class="form-control mt-2">
+                <option value="2">selectionner un status</option>
+                <option value="0">En progression</option>
+                <option value="1">Livre</option>
+              </select>
+              <span class="text-danger text-xs" id="error-delivrery"></span>
+              <button type="submit" class="btn btn-primary mt-4 w-100" id="submit-button-delivrery"> Sousmettre </button>
+            </form>
+          </div>
+
+        </div>
+        <div class="modal-footer float-righ">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </section>
 
 
@@ -313,18 +366,18 @@
             var submitButton = $('#submit-button');
 
             if (data.fullDataPay.total_amount > data.fullDataPay.paid_amount) {
-                // Si nbre1 est supérieur à nbre2, affichez la div
-                $("#payDiv").show();
-              } else if (data.fullDataPay.total_amount == data.fullDataPay.paid_amount) {
-                // Si nbre1 est égal à nbre2, masquez la div
-                $("#payDiv").hide();
-              }
+              // Si nbre1 est supérieur à nbre2, affichez la div
+              $("#payDiv").show();
+            } else if (data.fullDataPay.total_amount == data.fullDataPay.paid_amount) {
+              // Si nbre1 est égal à nbre2, masquez la div
+              $("#payDiv").hide();
+            }
 
             $('#paid-amount-input').on('input', function() {
               var paidAmount = parseFloat($(this).val());
               var comparisonMessage = $('#comparison-message');
 
-             
+
               // Vérifier si le champ est vide ou le montant est supérieur
               if (paidAmount > dueAmountCompare) {
                 comparisonMessage.html('Le montant saisi est invalide ou supérieur au montant dû.');
@@ -347,18 +400,133 @@
     });
   });
 </script>
-<script>
-  $(document).ready(function () {
-    $('#shot').on('click',function(){
 
-       
-            var tbodyPay = $("#payment-report");
-            tbodyPay.empty(); // Vider le contenu actuel du tbodyPay
+<!-- les livraisons status modal -->
+<script>
+  $(document).ready(function() {
+    $(".edit-invoice-delivrery").on("click", function(event) {
+      event.preventDefault();
+
+      var invoiceId = $(this).data("id");
+      $('#showStatusDelivrery').empty();
+      $('#showStatusDelivrery').append('<h4 class="modal-title text-center">' + " Chargement ..." + '</h4>');
+      console.log(invoiceId);
+      // Effectuer la requête AJAX pour récupérer les détails de la facture
+      setTimeout(function() {
+        $.ajax({
+          url: "{{ route('modalDetailsDelivrery') }}", // Remplacez par l'URL de votre route AJAX
+          type: "GET",
+          data: {
+            invoice_id: invoiceId
+          },
+
+
+          success: function(data) {
+            var result = data.statusDelivrery.livraison;
+            console.log(data.statusDelivrery.livraison);
+            $('#showStatusDelivrery').empty();
+            $("#invoice-id-input-delivrery").val(data.invoiceId);
+            var showDelivrery = $('#showStatusDelivrery');
+
+            if (result == '0') {
+              var appendResult = '<h4 class="modal-title">' + "Status Livraison actuel :" + '<span class="text-info text-lg">' + ' En progression🙂' + '<span>' + '</h4>';
+              showDelivrery.append(appendResult);
+              console.log('in progressing');
+            } else if (result == '1') {
+              var appendResult = '<h4 class="modal-title">' + "Status Livraison actuel : " + '<span class="text-success">' + ' Article Livré  ✅' + '<span>' + '</h4>';
+              showDelivrery.append(appendResult);
+              console.log('livree');
+            }
+
+          }
+        });
+      }, 700); // Délai de 2 secondes (2000 ms)
+    });
+  });
+
+  $(document).ready(function() {
+    $("#my-form-delivrery").on("submit", function(e) {
+      e.preventDefault();
+
+      var submitButton = $('#submit-button-delivrery');
+      submitButton.html('En cours...');
+
+      var invoiceId = $("#invoice-id-input-delivrery").val();
+      var livraison = $("#delivrery").val();
+      $("#payment-message-delivrery").empty();
+      $("#payment-message-delivrery-error").empty();
+      if (livraison == '2') {
+
+        $('#error-delivrery').html('Veuillez sélectionner un statut.').fadeIn();
+        setTimeout(function() {
+          $("#error-delivrery").fadeOut();
+          // location.reload();
+        }, 2000);
+        submitButton.html('Soumettre');
+        return;
+      }
+      console.log(invoiceId, livraison);
+
+      $.ajax({
+        url: "{{ route('update-delivrery') }}", // Remplacez par l'URL de votre route de mise à jour
+        type: "POST",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+          invoice_id: invoiceId,
+          livraison: livraison
+        },
+        success: function(data) {
+          submitButton.html('Soumettre');
+          console.log(data.error.length);
+          // Afficher le message "Paiement effectué" dans le span
+          if (data.message.length != 0) {
+            $("#payment-message-delivrery").text(data.message).fadeIn();    
+            // Après deux secondes, masquer le message
+            setTimeout(function() {
+              $("#payment-message-delivrery").fadeOut();
+              location.reload();
+            }, 2000);        
+          }else if ( data.error.length != 0) {
+    
+            $("#payment-message-delivrery-error").text(data.error).fadeIn(); 
+            setTimeout(function() {
+            $("#payment-message-delivrery-error").fadeOut();
+            // location.reload();
+          }, 3000);                       
+          }
+
+          // Après deux secondes, masquer le message
+          // setTimeout(function() {
+          //   $("#payment-message-delivrery").fadeOut();
+          //   location.reload();
+          // }, 2000);
+
+        },
+        error: function(error) {
+          // En cas d'erreur, remettre le texte original sur le bouton
+          submitButton.html('Soumettre');
+
+          // Gérer l'erreur
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#shot').on('click', function() {
+
+
+      var tbodyPay = $("#payment-report");
+      tbodyPay.empty(); // Vider le contenu actuel du tbodyPay
     })
   })
 </script>
 
-<!-- soumttre payement -->
+<!-- soumttre PAYMENT -->
 <script>
   $(document).ready(function() {
     $("#my-form").on("submit", function(e) {

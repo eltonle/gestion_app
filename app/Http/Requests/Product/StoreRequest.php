@@ -27,7 +27,6 @@ class StoreRequest extends FormRequest
 
                'name'=>'required|string|max:50',
                'category_id'=>'required|integer|exists:App\Models\Category,id',
-               'unit_id'=>'required|integer|exists:App\Models\Unit,id',
 
         ];
     }

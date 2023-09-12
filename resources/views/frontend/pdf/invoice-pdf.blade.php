@@ -100,7 +100,13 @@
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Remise</td>
-                            <td class="text-center"><strong>{{ $payment->discount_amount }} FCFA</strong></td>
+                            <td class="text-center"><strong>
+                            @if ($payment->discount_amount === NULL)
+                                            0
+                                            @else
+                                            {{ $payment->discount_amount }}
+                                            @endif 
+                                 FCFA</strong></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Montant payé</td>

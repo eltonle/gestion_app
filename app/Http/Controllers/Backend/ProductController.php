@@ -43,8 +43,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $units = Unit::all();
-        return view('frontend.products.create', compact('categories','units'));
+        return view('frontend.products.create', compact('categories'));
     }
 
     /**
@@ -58,7 +57,6 @@ class ProductController extends Controller
        $product = new Product();
        $product->name = $request->name;
        $product->category_id = $request->category_id;
-       $product->unit_id = $request->unit_id;
        $product->created_by = Auth::user()->id;
       
         if ($product->save()) {
@@ -93,8 +91,7 @@ class ProductController extends Controller
     { 
         $product = Product::find($id);
         $categories = Category::all();
-        $units = Unit::all();
-        return view('frontend.products.edit', compact('categories','units','product'));
+        return view('frontend.products.edit', compact('categories','product'));
     }
 
     /**
@@ -109,7 +106,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name = $request->name;
         $product->category_id = $request->category_id;
-        $product-> unit_id = $request->unit_id;
         $product->updated_by = Auth::user()->id;
 
         $product->save();

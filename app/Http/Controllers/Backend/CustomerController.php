@@ -238,12 +238,12 @@ class CustomerController extends Controller
 
 
 
-    public function edit_invoice($invoice_id)
-    {
-      $payment = Payment::where('invoice_id',$invoice_id)->first();
+    // public function edit_invoice($invoice_id)
+    // {
+    //   $payment = Payment::where('invoice_id',$invoice_id)->first();
       
-      return view('frontend.customers.edit_invoice',compact('payment'));
-    }
+    //   return view('frontend.customers.edit_invoice',compact('payment'));
+    // }
 
 
     public function update_invoice(InvoiceUpdateRequest $request,$invoice_id)

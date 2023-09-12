@@ -92,7 +92,7 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('product.create')  ? 'active' : '' }} ">
+                          <a href="{{ route('products.create') }}" class="nav-link {{ Route::is('products.create')  ? 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Creer un article</p>
                           </a>
@@ -112,6 +112,12 @@
                   <ul class="nav nav-treeview">
                     
                     <li class="nav-item">
+                      <a href="{{ route('customers.create') }}" class="nav-link {{ Route::is('customers.create')  ? 'active' : '' }}">
+                      <i class="fas fa-arrow-right mr-2"></i>
+                        <p>Ajouter Client</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
                       <a href="{{ route('customers.index') }}" class="nav-link {{ Route::is('customers.index')  ? 'active' : '' }}">
                       <i class="fas fa-arrow-right mr-2"></i>
                         <p>Voir Clients</p>
@@ -119,12 +125,12 @@
                     </li>
                    
                     
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="{{ route('customers.disponible.status') }}" class="nav-link {{ Route::is('customers.disponible.status')  ? 'active' : '' }}">
                       <i class="fas fa-arrow-right mr-2"></i>
                         <p>Disponibilité & Status</p>
                       </a>
-                    </li>                   
+                    </li>                    -->
                   </ul>
                 </li>
 

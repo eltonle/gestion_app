@@ -18,7 +18,6 @@ class Product extends Model
         'created_by',
         'updated_by',
         'category_id',
-        'unit_id',
     ];
 
     public function category()
@@ -26,8 +25,5 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function unit()
-    {
-        return $this->belongsTo(Unit::class);
-    }
+   
 }

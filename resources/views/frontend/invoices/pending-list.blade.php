@@ -45,7 +45,7 @@ Customers
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped table-responsive">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>NI</th>
@@ -60,9 +60,9 @@ Customers
                     </thead>
                     <tbody>
                         @foreach ($invoices as $key => $invoice)
-                        <tr class="text-sm">
+                        <tr >
                             <td>{{ $loop->index+1 }}</td>
-                            <td>invoice No#{{ $invoice->invoice_no }}</td>
+                            <td>facture No#{{ $invoice->invoice_no }}</td>
                             <td>
                                 {{ $invoice['payment']['customer']['name'] }}_
                                 {{ $invoice['payment']['customer']['mobile_no'] }}_
@@ -95,14 +95,14 @@ Customers
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>NI</th>
-                        <th>Invoice No</th>
-                        <th>Customer Name</th>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Total_amount</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                      <th>NI</th>
+                      <th>No_facture</th>
+                      <th>Nom Client</th>
+                      <th>Date</th>
+                      <th>Description</th>
+                      <th>Montant total</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                     </tfoot>
                   </table>

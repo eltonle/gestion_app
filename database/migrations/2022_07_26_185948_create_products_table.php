@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->tinyInteger('status')->default('1');
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('unit_id')->constrained();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
@@ -35,7 +34,6 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('category_id');
-            $table->dropColumn('unit_id');
         });
         
         Schema::dropIfExists('products');

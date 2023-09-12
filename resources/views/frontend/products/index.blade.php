@@ -51,7 +51,6 @@
                       <th>#ID</th>
                       <th>Nom</th>
                       <th>Category</th>
-                      <th>Unit</th>
                       <th>Actions</th>
                     </tr>
                     </thead>
@@ -61,7 +60,6 @@
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->unit->name }}</td>
                             <td class="d-flex">
                               @can('create-article')
                                <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>

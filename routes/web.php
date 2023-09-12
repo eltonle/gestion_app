@@ -20,6 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/{year}', [App\Http\Controllers\HomeController::class, 'chartData']);
+
+
+// Route de fallback pour rediriger vers la page de connexion
+Route::fallback(function () {
+    return redirect('/'); // Remplacez '/login' par l'URL de votre page de connexion
+});
+
 
 
 Route::group(['middleware' => ['auth']], function(){
@@ -36,15 +44,15 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('customer/paid',[CustomerController::class, 'paidcustomer'])->name('customers.paid');
     Route::get('customer/credit/pdf',[CustomerController::class, 'creditcustomerpdf'])->name('customers.credit.pdf');
     Route::get('customer/paid/pdf',[CustomerController::class, 'paidcustomerpdf'])->name('customers.paid.pdf');
-    Route::get('customer/edit_invoice/{invoice_id}',[CustomerController::class, 'edit_invoice'])->name('customers.edit.invoice');
+    // Route::get('customer/edit_invoice/{invoice_id}',[CustomerController::class, 'edit_invoice'])->name('customers.edit.invoice');
     Route::post('customer/update_invoice/{invoice_id}',[CustomerController::class, 'update_invoice'])->name('customers.update.invoice');
     Route::get('customer/invoice/details/pdf/{invoice_id}',[CustomerController::class,'invoiceDetailsPdf'])->name('invoices.details.pdf');
     Route::get('customer/wise/report',[CustomerController::class, 'wiseReport'])->name('customers.wise.report');
     Route::get('customer/wise/credit/report',[CustomerController::class, 'wiseCredit'])->name('customers.wise.credit.report');
     Route::get('customer/wise/paid/report',[CustomerController::class, 'wisePaid'])->name('customers.wise.paid.report');
     Route::get('customer/disponible&status',[CustomerController::class, 'disponible_status'])->name('customers.disponible.status');
-    Route::get('customer/disponible&status/{id}',[CustomerController::class, 'disponible_status_edit'])->name('customers.disponible.status.edit');
-    Route::Put('customer/disponible_status/update/{id}',[CustomerController::class , 'update_disponible_status'])->name('customers.disponible.status.update');
+    // Route::get('customer/disponible&status/{id}',[CustomerController::class, 'disponible_status_edit'])->name('customers.disponible.status.edit');
+    // Route::Put('customer/disponible_status/update/{id}',[CustomerController::class , 'update_disponible_status'])->name('customers.disponible.status.update');
    
    
     // Route::resource('unit/units',UnitController::class);
@@ -68,5 +76,7 @@ Route::group(['middleware' => ['auth']], function(){
     });
 
     Route::get('/getPayments', [InvoiceController::class, 'getInvoicePayment'])->name('modalDetails');
+    Route::get('/getDelivrery', [InvoiceController::class, 'getInvoiceDelivrery'])->name('modalDetailsDelivrery');
     Route::post('/update-payment',[InvoiceController::class, 'updatePayment'])->name('update-payment');
+    Route::post('/update-delivrery',[InvoiceController::class, 'updateDelivrery'])->name('update-delivrery');
 }); 
