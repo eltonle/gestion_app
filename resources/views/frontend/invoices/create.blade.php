@@ -89,8 +89,7 @@
                       <th>Categorie</th>
                       <th>Nom article</th>
                       <th width="7%">Pcs/kg</th>
-                      <th width="10%">Unit Price</th>
-                      {{-- <th>description</th> --}}
+                      <th width="10%"> Prix Unitaire</th>
                       <th width="17%">Total Price</th>
                       <th width="10%">Action</th>
                     </tr>

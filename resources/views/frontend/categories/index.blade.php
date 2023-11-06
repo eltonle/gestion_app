@@ -65,11 +65,13 @@ Customers
                                <a class="btn  btn-xs btn-success text-white mr-1" href="{{ route('categories.edit', $category->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
                               @endcan
                               @can('delete-category')
+                              @if($category->products->count() < 1)                            
                                 <form method="POST" action="{{ route('categories.destroy', $category->id) }}">
                                   @csrf
                                   <input name="_method" type="hidden" value="DELETE">
                                   <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
                                 </form>
+                                @endif
                               @endcan
                             </td>
                           </tr>  

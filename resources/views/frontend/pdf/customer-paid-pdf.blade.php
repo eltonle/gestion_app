@@ -79,7 +79,7 @@
                         @endforeach
                         <tr>
                             <td colspan="3" style="text-align: right;"><strong>Grand Total</strong></td>
-                            <td style="color: red;"><strong>{{ $total_paid }}</strong> FCFA</td>
+                            <td style="color: green;"><strong>{{ $total_paid }}</strong> FCFA</td>
                         </tr>
                     </tbody>
                  </table>

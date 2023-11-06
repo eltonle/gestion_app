@@ -71,8 +71,7 @@ customers
                             </td>
                             <td>{{ date('d-M-Y',strtotime($payment['customer']['date'])) }}</td>
                             <td>{{ $payment->due_amount }} fcfa</td>
-                            <td class="d-flex ">
-                              <!-- <a class="btn btn-xs btn-primary text-white mr-1" href="{{ route('customers.edit.invoice', $payment->invoice_id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a> -->
+                            <td class="d-flex ">                             
                               <a href="{{ route('invoices.details.pdf',$payment->invoice_id) }}" target="_blank" title="details" class="btn btn-success btn-xs"><i class="fa fa-eye"></i></a>
                             </td>
                             @php

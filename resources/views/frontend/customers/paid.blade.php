@@ -98,7 +98,7 @@ customers
                   
                     <tbody>
                       <td colspan="5" style="text-align: right;"><strong>Grand Total</strong></td>
-                      <td style="color: red;"><strong>{{ $total_paid }}</strong> fcfa</td>               
+                      <td style="color: green;"><strong>{{ $total_paid }}</strong> fcfa</td>               
                     </tbody>
                   </table>
                 </div>

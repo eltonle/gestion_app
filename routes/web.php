@@ -20,7 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home/{year}', [App\Http\Controllers\HomeController::class, 'chartData']);
+
+// ESSAI CHARJS DATA
+Route::get('/home/{year}', [App\Http\Controllers\HomeController::class, 'getDatajs']);
 
 
 // Route de fallback pour rediriger vers la page de connexion
@@ -31,9 +33,6 @@ Route::fallback(function () {
 
 
 Route::group(['middleware' => ['auth']], function(){
-    //search filter in home
-    Route::get('/home/search/filter', [App\Http\Controllers\HomeController::class, 'filter'])->name('infos.filter');
-
 
     Route::resource('roles',RoleController::class);
     Route::resource('users', UserController::class);
@@ -44,22 +43,18 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('customer/paid',[CustomerController::class, 'paidcustomer'])->name('customers.paid');
     Route::get('customer/credit/pdf',[CustomerController::class, 'creditcustomerpdf'])->name('customers.credit.pdf');
     Route::get('customer/paid/pdf',[CustomerController::class, 'paidcustomerpdf'])->name('customers.paid.pdf');
-    // Route::get('customer/edit_invoice/{invoice_id}',[CustomerController::class, 'edit_invoice'])->name('customers.edit.invoice');
     Route::post('customer/update_invoice/{invoice_id}',[CustomerController::class, 'update_invoice'])->name('customers.update.invoice');
     Route::get('customer/invoice/details/pdf/{invoice_id}',[CustomerController::class,'invoiceDetailsPdf'])->name('invoices.details.pdf');
     Route::get('customer/wise/report',[CustomerController::class, 'wiseReport'])->name('customers.wise.report');
     Route::get('customer/wise/credit/report',[CustomerController::class, 'wiseCredit'])->name('customers.wise.credit.report');
     Route::get('customer/wise/paid/report',[CustomerController::class, 'wisePaid'])->name('customers.wise.paid.report');
     Route::get('customer/disponible&status',[CustomerController::class, 'disponible_status'])->name('customers.disponible.status');
-    // Route::get('customer/disponible&status/{id}',[CustomerController::class, 'disponible_status_edit'])->name('customers.disponible.status.edit');
-    // Route::Put('customer/disponible_status/update/{id}',[CustomerController::class , 'update_disponible_status'])->name('customers.disponible.status.update');
    
    
-    // Route::resource('unit/units',UnitController::class);
     Route::get('master/vetements',[VetementController::class, 'index'])->name('vetements.index');
     Route::get('get-product',[DefaultController::class, 'getProduct'])->name('get-product');
 
-    Route::prefix('invoice')->group(function(){
+    Route::prefix('factures')->group(function(){
        Route::get('view',[InvoiceController::class , 'index'])->name('invoices.index');
        Route::get('create',[InvoiceController::class , 'create'])->name('invoices.create');
        Route::post('store',[InvoiceController::class , 'store'])->name('invoices.store');

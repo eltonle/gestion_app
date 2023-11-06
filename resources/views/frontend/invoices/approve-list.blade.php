@@ -40,7 +40,7 @@ Customers
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Invoice list</h3>
+                    <h3 class="card-title">Facture</h3>
                     <a href="{{ route('invoices.pendind.list.index') }}" class="btn btn-info btn-sm float-right" title="Create"><i class="fa fa-list"></i> Listes des factures en attentes</a>
                 </div>
                 <!-- /.card-header -->

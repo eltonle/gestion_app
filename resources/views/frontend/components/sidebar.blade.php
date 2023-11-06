@@ -123,14 +123,7 @@
                         <p>Voir Clients</p>
                       </a>
                     </li>
-                   
-                    
-                    <!-- <li class="nav-item">
-                      <a href="{{ route('customers.disponible.status') }}" class="nav-link {{ Route::is('customers.disponible.status')  ? 'active' : '' }}">
-                      <i class="fas fa-arrow-right mr-2"></i>
-                        <p>Disponibilité & Status</p>
-                      </a>
-                    </li>                    -->
+                                                         
                   </ul>
                 </li>
 

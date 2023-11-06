@@ -95,7 +95,11 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" role="menu">
+
+                      @if ($invoice->payment_details->count() <= 1)                      
                       <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.edit', $invoice->id) }}"><i class="fa fa-edit"></i> editer</a>
+                      @endif
+
                       <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.print', $invoice->id) }}" target="_bank"><i class="fa fa-print"></i> imprimer</a>
 
                       <a class="dropdown-item alert-link edit-invoice-link text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default">
@@ -140,7 +144,7 @@
       </div>
     </div>
   </div>
-  <!-- modal  d'historique -->
+  <!-- MODAL  d'HISTORIQUE -->
   <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -150,10 +154,15 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="d-flex justify-content-center align-items-center w-100">
+        <!-- <div class="d-flex justify-content-center align-items-center w-100">
           <span id="progress-indicator"></span>
-        </div>
+        </div> -->
         <div class="modal-body">
+          <div class="text-center" id="progress-indicator-loader" style="display: none;">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -168,7 +177,7 @@
 
           </table>
           <hr>
-          <div style="text-align: center;" class="mb-5">
+          <div style="text-align: center;">
             <h6 style="font-style: italic;">information de paiements</h6>
           </div>
           <div style="text-align: center;">
@@ -196,7 +205,7 @@
                   <input type="number" min="100" name="paid_amount" id="paid-amount-input" class="form-control " placeholder="Effectuer un paiement">
                   <span id="comparison-message" class="text-danger text-xs italic"></span>
                 </div>
-                <button type="submit" id="submit-button" class="btn btn-primary w-100" disabled>Soumettre</button>
+                <button type="submit" id="submit-button" class="btn btn-primary w-100">Soumettre</button>
               </div>
             </form>
           </div>
@@ -300,14 +309,20 @@
   $(document).ready(function() {
     $(".edit-invoice-link").on("click", function(event) {
       event.preventDefault();
+      // Affichez l'indicateur de chargement
+      $("#progress-indicator-loader").show();
+      var btn = $("#paid_amount").val();
+      console.log(btn);
+      if (!btn) {
+        $('#submit-button').prop('disabled', true);
+      }
 
       var invoiceId = $(this).data("id");
-      // Afficher les points de progression pendant le chargement
-      var progressIndicator = $("#progress-indicator");
-      progressIndicator.html("Chargement en cours...");
 
       var tbody = $("#payment-table-body");
-      tbody.empty(); // Vider le contenu actuel du tbody
+      var tbodyPay = $("#payment-report");
+      tbody.empty();
+      tbodyPay.empty();
       console.log(invoiceId);
       // Effectuer la requête AJAX pour récupérer les détails de la facture
       setTimeout(function() {
@@ -318,13 +333,13 @@
             invoice_id: invoiceId
           },
           success: function(data) {
-
+            $("#progress-indicator-loader").hide();
             console.log(data);
             // Mettre à jour la partie tbody du tableau avec les données récupérées via AJAX
-            var tbody = $("#payment-table-body");
-            var tbodyPay = $("#payment-report");
-            tbody.empty(); // Vider le contenu actuel du tbody
-            tbodyPay.empty(); // Vider le contenu actuel du tbodyPay
+            // var tbody = $("#payment-table-body");
+            // var tbodyPay = $("#payment-report");
+            // tbody.empty(); // Vider le contenu actuel du tbody
+            // tbodyPay.empty(); // Vider le contenu actuel du tbodyPay
             let index = 1
             // Ajouter les données des paiements au tbody
             data.payments.forEach(function(payment) {
@@ -359,7 +374,7 @@
 
             tbodyPay.append(pay);
             // Retirer les points de progression une fois les données chargées
-            progressIndicator.empty();
+
             $("#invoice-id-input").val(data.invoiceId);
 
             var dueAmountCompare = parseFloat(data.fullDataPay.due_amount);
@@ -482,19 +497,19 @@
           console.log(data.error.length);
           // Afficher le message "Paiement effectué" dans le span
           if (data.message.length != 0) {
-            $("#payment-message-delivrery").text(data.message).fadeIn();    
+            $("#payment-message-delivrery").text(data.message).fadeIn();
             // Après deux secondes, masquer le message
             setTimeout(function() {
               $("#payment-message-delivrery").fadeOut();
               location.reload();
-            }, 2000);        
-          }else if ( data.error.length != 0) {
-    
-            $("#payment-message-delivrery-error").text(data.error).fadeIn(); 
+            }, 2000);
+          } else if (data.error.length != 0) {
+
+            $("#payment-message-delivrery-error").text(data.error).fadeIn();
             setTimeout(function() {
-            $("#payment-message-delivrery-error").fadeOut();
-            // location.reload();
-          }, 3000);                       
+              $("#payment-message-delivrery-error").fadeOut();
+              // location.reload();
+            }, 3000);
           }
 
           // Après deux secondes, masquer le message

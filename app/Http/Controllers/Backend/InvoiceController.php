@@ -196,8 +196,11 @@ class InvoiceController extends Controller
                             $payment->customer_id = $customer_id;
                             // Mettez à jour les champs nécessaires du paiement
                                                     
-                            // $payment_details = new PaymentDetail();
-                            $payment_details = PaymentDetail::where('invoice_id', $invoice->id)->firstOrFail();
+                            $payment_details_delete = PaymentDetail::where('invoice_id', $invoice->id)->firstOrFail();
+                            if ($payment_details_delete) {
+                                $payment_details_delete->delete(); // Supprimez les détails de paiement existants
+                            }
+                            $payment_details = new PaymentDetail();
                             $payment->invoice_id = $invoice->id;
                             $payment->customer_id = $customer_id;
                             // $payment->paid_status = $request->paid_status;
