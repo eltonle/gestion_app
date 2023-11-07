@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('products',ProductController::class);
-    Route::resource('customer/customers',CustomerController::class);
+    Route::resource('customers',CustomerController::class);
     Route::get('customer/credit',[CustomerController::class, 'creditcustomer'])->name('customers.credit');
     Route::get('customer/paid',[CustomerController::class, 'paidcustomer'])->name('customers.paid');
     Route::get('customer/credit/pdf',[CustomerController::class, 'creditcustomerpdf'])->name('customers.credit.pdf');

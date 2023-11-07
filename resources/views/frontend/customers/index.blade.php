@@ -67,11 +67,13 @@ Si vous le supprimez, il disparaîtra pour toujours>Clients</h1>
                               <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('customers.edit', $customer->id) }}" title="edit"><i class="nav-icon far fa-edit"></i></a>
                               
                               @can('delete-client')
+                               @if($customer->payments->count() < 1 )                            
                                 <form method="POST" action="{{ route('customers.destroy', $customer->id) }}">
                                   @csrf
                                   <input name="_method" type="hidden" value="DELETE">
                                   <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box btn-xs " data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
                                 </form>
+                                @endif
                               @endcan  
                             </td>
                           </tr>  

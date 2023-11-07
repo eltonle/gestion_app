@@ -62,14 +62,18 @@
                             <td>{{ $product->category->name }}</td>
                             <td class="d-flex">
                               @can('create-article')
+                                                             
                                <a class="btn btn-xs btn-success text-white mr-1" href="{{ route('products.edit', $product->id) }}" title="editer"><i class="nav-icon far fa-edit"></i></a>
+                              
                               @endcan
                               @can('delete-article')
+                               @if($product->invoice_details->count() < 1) 
                                 <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                   @csrf
                                   <input name="_method" type="hidden" value="DELETE">
                                   <button type="submit" class="btn  btn-danger btn-flat show-alert-delete-box  btn-xs" data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                                </form>
+                                </form> 
+                                @endif
                              @endcan
                             </td>
                           </tr>  

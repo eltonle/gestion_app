@@ -228,6 +228,7 @@
         });
     }
     // Chargez initialement le graphique pour l'année actuelle
-    updateChart(new Date().getDate());
+    var day = 'day'
+    updateChart(day);
 </script>
 @endsection
