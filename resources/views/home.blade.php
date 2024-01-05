@@ -2,7 +2,7 @@
 
 @section('css')
 <style>
-   
+
 </style>
 @endsection
 @section('content')
@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Accueil</h1>
+                <h1 class="m-0">Accueil <i class="nav-icon fas fa-tachometer-alt"></i></h1>
             </div>
         </div>
     </div>
@@ -178,7 +178,7 @@
                             //     borderColor: 'rgba(255, 99, 132, 1)',
                             //     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             // },
-                            
+
                             {
                                 label: 'details Paye',
                                 data: details_paiements,

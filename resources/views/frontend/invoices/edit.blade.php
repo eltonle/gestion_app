@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Facture</h1>
+                <h1 class="m-0">Facture <i class="nav-icon fas fa-balance-scale"></i></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -103,7 +103,7 @@
                                 <tbody id="addRow" class="addRow">
                                     @foreach ($invoice->invoice_details as $invoice_detail)
 
-                                    <tr class="delete_add_more_item" id="delete_add_more_item">                                    
+                                    <tr class="delete_add_more_item" id="delete_add_more_item">
                                         <td>
                                             <input type="hidden" name="category_id[]" value="{{$invoice_detail->category_id}}">
 
@@ -240,7 +240,7 @@
 {{-- extra_add_exist_item --}}
 <script type="text/javascript">
     $(document).ready(function() {
-        $(document).on("click", ".addeventmore", function() {        
+        $(document).on("click", ".addeventmore", function() {
             var category_id = $('#category_id').val();
             var category_name = $('#category_id').find('option:selected').text();
             var product_id = $('#product_id').val();
@@ -270,7 +270,7 @@
 
             var source = $("#document-template").html();
             var template = Handlebars.compile(source);
-            var data = {              
+            var data = {
                 category_id: category_id,
                 category_name: category_name,
                 product_id: product_id,

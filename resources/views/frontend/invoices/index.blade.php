@@ -20,7 +20,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Factures</h1>
+        <h1 class="m-0">Factures <i class="nav-icon fas fa-balance-scale"></i></h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -96,27 +96,26 @@
                     </button>
                     <div class="dropdown-menu" role="menu">
 
-                      @if ($invoice->payment_details->count() <= 1)                      
-                      <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.edit', $invoice->id) }}"><i class="fa fa-edit"></i> editer</a>
-                      @endif
+                      @if ($invoice->payment_details->count() <= 1) <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.edit', $invoice->id) }}"><i class="fa fa-edit"></i> editer</a>
+                        @endif
 
-                      <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.print', $invoice->id) }}" target="_bank"><i class="fa fa-print"></i> imprimer</a>
+                        <a class="dropdown-item alert-link text-sm" href="{{ route('invoices.print', $invoice->id) }}" target="_bank"><i class="fa fa-print"></i> imprimer</a>
 
-                      <a class="dropdown-item alert-link edit-invoice-link text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default">
+                        <a class="dropdown-item alert-link edit-invoice-link text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default">
 
-                        <i class="fas fa-donate"></i> les paiements
+                          <i class="fas fa-donate"></i> les paiements
 
-                      </a>
-                      @if ($invoice->livraison === 0 )
-                      <a class="dropdown-item alert-link edit-invoice-delivrery text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default-delivrery">
+                        </a>
+                        @if ($invoice->livraison === 0 )
+                        <a class="dropdown-item alert-link edit-invoice-delivrery text-sm" href="#" data-id="{{ $invoice->id }}" data-toggle="modal" data-target="#modal-default-delivrery">
 
-                        <i class="fas fa-tag"></i> Livraison
+                          <i class="fas fa-tag"></i> Livraison
 
-                      </a>
-                      @endif
+                        </a>
+                        @endif
 
 
-                      <!-- <div class="dropdown-divider"></div>
+                        <!-- <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Action3</a> -->
                     </div>
                   </div>
